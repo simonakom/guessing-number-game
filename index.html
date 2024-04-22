@@ -9,15 +9,20 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container my-5">
-        <div><img class="my-5" src="./pictures/logo.png"></div>
-        <p class="title">A number between <b>1</b> and <b>20</b> has been generated.  Enter your guess.<br> If your guess was lower or higher than the number generated, we will notify you.<br><br> You have a total of <b id="spejimu-skaicius">6</b> guesses. Good luck!</p> 
-        <div class="align my-5">
-            <input id="guess" class="form-control py-3 px-4 rounded-5" type="number" placeholder="Type your number here..." required/>
+    <div class="container overflow-hidden px-3">
+        <div class="row justify-content-center align-items-center text-center my-5">
+            <div class="col-md-6">
+                <img class="my-5" src="./pictures/logo.png" alt="Logo">
+                <p>A number between <b>1</b> and <b>20</b> has been generated.  Enter your guess.<br> If your guess was lower or higher than the number generated, we will notify you.<br></p> 
+                <p id="result">You have a total of <b id="numberOfAttemptsLeft">6</b> guesses. Good luck!</p>
+                <div class="d-flex justify-content-center align-items-center my-5">
+                    <input id="guess" class="form-control py-3 px-4 rounded-5" type="number" placeholder="Type your number here..." required/>
+                </div>
+                <button type="button" onclick="guessNumber()" class="check btn btn-primary py-3 px-5 rounded-5" id="check">Check</button>
+                <p class="my-4" id="hint"></p>
+                <button type="button" style="display: none" onclick="refreshPage()" class="reload btn btn-primary py-3 px-1 rounded-5" id="reload">Play Again!</button>
+            </div>
         </div>
-        <button type="button" onclick="guessNumber()" class="again btn btn-primary py-3 px-5 rounded-5" id="again">Check</button>
-        <p class="my-4" id="rez"></p>
-        <button type="button" style="display: none" onclick="refreshPage()" class="again2 btn btn-primary py-3 my-4 px-5 rounded-5" id="again2">Play Again!</button>
     </div>
     <script src="script.js"></script>
 </body>

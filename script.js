@@ -2,46 +2,49 @@ function rand(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-let atsitiktinisSkaičius = rand(1, 20),
-	spejimuSkaicius = 6;
-console.log(atsitiktinisSkaičius);
+let randomNumber = rand(1, 20);
+let totalAttempts = 6;
+console.log(randomNumber);
 
 function guessNumber() {
 	let inputElement = document.querySelector("#guess");
-	let resultParagraph = document.querySelector("#rez");
-	let guessCountElement = document.querySelector("#spejimu-skaicius");
+	let numberOfAttempts = document.querySelector("#numberOfAttemptsLeft");
+	let hintParagraph = document.querySelector("#hint");
+	let resultParagraph = document.querySelector("#result");
 
 	// if not entered any number
 	if (inputElement.value.trim() === "") {
-		resultParagraph.innerText = `Please enter a guess 🔮`;
+		hintParagraph.innerText = `Please enter a guess 🔮`;
         return;
     }
 	// run out of guesses
-	if (spejimuSkaicius === 0) {
+	if (totalAttempts === 1) {
 		resultParagraph.innerText = `The number of guesses has run out, please try again! 😓`;
-		// check button disabled and play again appear
-        document.getElementById("again").disabled = true;
-		document.getElementById("again").style.display = "none";
-		document.getElementById("again2").style.display = "block";
+		resultParagraph.style.color = "rgba(152, 36, 123, 0.974)";
+		hintParagraph.style.display = "none";
+		// check button disabled and "play again" appear
+		document.getElementById("check").style.display = "none";
+		document.getElementById("reload").style.display = "block";
 		return;
 	}
 	// comments
-	spejimuSkaicius--;
-	guessCountElement.innerText = spejimuSkaicius;
+	totalAttempts--;
+	numberOfAttempts.innerText = totalAttempts;
 	let inputValue = inputElement.value;
 
-	if (inputValue > atsitiktinisSkaičius) {
-		resultParagraph.innerText = `Try lower number! 👇`;
-	} else if (inputValue < atsitiktinisSkaičius) {
-		resultParagraph.innerText = `Try higher number! 👆`;
+	if (inputValue > randomNumber) {
+		hintParagraph.innerText = `Try lower number! 👇`;
+	} else if (inputValue < randomNumber) {
+		hintParagraph.innerText = `Try higher number! 👆`;
 	} else {
 		resultParagraph.innerText = `Congratulations! You guessed the number! 🥳`;
-		resultParagraph.innerHTML += `<br><span style="font-size: smaller;"> After ${6 - spejimuSkaicius} attempt(s)</span>`;
-
-	// check button disabled and play again appear
-        document.getElementById("again").disabled = true;
-		document.getElementById("again").style.display = "none";
-		document.getElementById("again2").style.display = "block";
+		resultParagraph.style.color = "rgba(152, 36, 123, 0.974)";
+		resultParagraph.innerHTML += `<br><span style="font-size: smaller;"> After ${6 - totalAttempts} attempt(s)</span>`;
+		hintParagraph.style.display = "none";
+		// check button disabled and play again appear
+        document.getElementById("check").disabled = true;
+		document.getElementById("check").style.display = "none";
+		document.getElementById("reload").style.display = "block";
 	}
 }
 function refreshPage() {
